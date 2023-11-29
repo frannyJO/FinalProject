@@ -568,7 +568,7 @@ int main() {
       */
 	 //sseg_check(&sseg);
 	  //(&sseg)->h2s(tempC);
-	  adt7420_check(&adt7420, &led, &sseg);
+	  ledBlink(4, &led);
 
 	  /*
       gsensor_check(&spi, &led);
