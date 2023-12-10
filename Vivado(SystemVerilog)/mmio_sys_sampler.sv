@@ -211,7 +211,7 @@ module mmio_sys_sampler
     .spi_miso(acl_miso),
     .spi_ss_n(acl_ss)
     );
-    /*
+    
    // slot 10: i2c 
     chu_i2c_core i2c_slot10 
     (.clk(clk),
@@ -239,7 +239,7 @@ module mmio_sys_sampler
      .ps2d(ps2d),
      .ps2c(ps2c)
      );
-     
+     /*
    // slot 12: ddfs 
    chu_ddfs_core ddfs_slot12 
    (.clk(clk),
