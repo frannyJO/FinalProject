@@ -299,13 +299,13 @@ void gsensor_check(SpiCore *spi_p, GpoCore *led_p) {
 //float tempC;
 
 void sseg_temp(float temp, SsegCore *sseg_p){
-uint8_t point = 0x10;
+   uint8_t point = 0x10;
 
-int temp_val = static_cast<int>(temp * 1000.0);
+   int temp_val = static_cast<int>(temp * 1000.0);
 
-int num_array[5];
+   int num_array[5];
 
-num_array[0] = (temp_val / 10000) % 10;
+   num_array[0] = (temp_val / 10000) % 10;
 num_array[1] = (temp_val / 1000) % 10;
 num_array[2] = (temp_val / 100) % 10;
 num_array[3] = (temp_val / 10) % 10;
@@ -373,60 +373,19 @@ void adt7420_check(I2cCore *adt7420_p, GpoCore *led_p, SsegCore *sseg_p) {
 
 }
 
-void testingnumbers(SsegCore *sseg_p, int num_array[8]){
-/*uint8_t point = 0x10;
+void displayScores(SsegCore *sseg_p, int num_array[8]){
 
-int temp_val = static_cast<int>(temp * 1000.0);
+   sseg_p->set_dp(0x00);
 
-int num_array[8];
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[0]), 0);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[1]), 1);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[2]), 2);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[3]), 3);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[4]), 4);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[5]), 5);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[6]), 6);
+   sseg_p->write_1ptn(sseg_p->h2s(num_array[7]), 7);
 
-num_array[0] = 0;
-num_array[1] = 0;
-num_array[2] = (temp_val / 100) % 10;
-num_array[3] = (temp_val / 10000) % 10;
-num_array[4] = 0;
-num_array[5] = 0;
-num_array[6] = (temp_val / 10) % 10;
-num_array[7] = 0;
-
-*/
-
-sseg_p->set_dp(0x00);
-/*
-for (int i = 0; i < 3; i++){
-sseg_p->write_1ptn(sseg_p->h2s(0), i);
-}
-
-for (int i = 4; i < 7; i++){
-  sseg_p->write_1ptn(sseg_p->h2s(0), i);
-}
-
-//sseg_p->set_dp(point);
-
-int points = 0;
-
-for(int i = 0; i < 8; i++){
-*/
-
-sseg_p->write_1ptn(sseg_p->h2s(num_array[0]), 0);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[1]), 1);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[2]), 2);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[3]), 3);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[4]), 4);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[5]), 5);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[6]), 6);
-sseg_p->write_1ptn(sseg_p->h2s(num_array[7]), 7);
-
-//points += 10;
-//sleep_ms(1000);
-
-/*if(i == 4){++++
-sseg_p->write_1ptn(sseg_p->h2s(12), 0);
-}
-else {
-sseg_p->write_1ptn(sseg_p->h2s(num_array[i]), 5 - i);
-}*/
-//}
 }
 
 
@@ -460,7 +419,7 @@ void catchTheLight(Ps2Core *ps2_p, GpoCore *led_p, SsegCore *sseg_p, GpiCore *sw
     uart.disp("Ready to begin game!\n\r");
     led_check(led_p, 16);
 
-    testingnumbers(sseg_p, num_array);
+    displayScores(sseg_p, num_array);
 
    //uart.disp("\n\rPS2 device (1-keyboard / 2-mouse): ");
    id = ps2_p->init();
@@ -900,7 +859,7 @@ void catchTheLight(Ps2Core *ps2_p, GpoCore *led_p, SsegCore *sseg_p, GpiCore *sw
                num_array[3] = player2point / 1000;
             }
 
-            testingnumbers(sseg_p, num_array);
+            displayScores(sseg_p, num_array);
 
             uart.disp(" ");
             //last = now_ms();
@@ -914,7 +873,7 @@ void catchTheLight(Ps2Core *ps2_p, GpoCore *led_p, SsegCore *sseg_p, GpiCore *sw
    else {
       num_array[3] = 1;
    }
-   testingnumbers(sseg_p, num_array);
+   displayScores(sseg_p, num_array);
    sleep_ms(2000);
 
    uart.disp("Game over\n\r");
