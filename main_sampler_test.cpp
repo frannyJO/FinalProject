@@ -430,7 +430,7 @@ sseg_p->write_1ptn(sseg_p->h2s(num_array[i]), 5 - i);
 }
 
 
-void ps2_check(Ps2Core *ps2_p, GpoCore *led_p, SsegCore *sseg_p, GpiCore *sw_p) {
+void catchTheLight(Ps2Core *ps2_p, GpoCore *led_p, SsegCore *sseg_p, GpiCore *sw_p) {
    int id;
    char ch;
    int player1point=0; //keyboard
@@ -1026,7 +1026,7 @@ int main() {
 
    while (1) {
       
-      ps2_check(&ps2, &led, &sseg, &sw);
+      catchTheLight(&ps2, &led, &sseg, &sw);
 
    }
 
